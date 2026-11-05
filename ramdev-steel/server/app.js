@@ -11,6 +11,7 @@ import { errorHandler } from "./middleware/errorHandler.js";
 import authRoutes from "./routes/authRoutes.js";
 import contentRoutes from "./routes/contentRoutes.js";
 import imageRoutes from "./routes/imageRoutes.js";
+import { ensureDefaultAdmin } from "./services/authService.js";
 import { seedDefaultContentIfEmpty } from "./services/contentService.js";
 
 // Ensure public DNS resolution for MongoDB Atlas SRV records
@@ -32,7 +33,10 @@ async function ensureDb() {
     dbPromise = (async () => {
       try {
         await connectDatabase(uri);
-        await seedDefaultContentIfEmpty().catch(() => {});
+        await Promise.all([
+          seedDefaultContentIfEmpty().catch(() => {}),
+          ensureDefaultAdmin().catch(() => {}),
+        ]);
       } catch (err) {
         console.error("Vercel Database connection failed:", err.message);
         dbPromise = null;

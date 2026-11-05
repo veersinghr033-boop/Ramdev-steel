@@ -16,17 +16,18 @@ function getCookieOptions() {
   };
 }
 
-export function login(req, res) {
+export async function login(req, res) {
   const { username, password } = req.body ?? {};
-  if (!authenticateAdmin(username, password)) {
+  const isValid = await authenticateAdmin(username, password);
+  if (!isValid) {
     return res.status(401).json({ message: "Incorrect username or password" });
   }
-  res.cookie(cookieName, createAdminToken(), getCookieOptions());
-  return res.json({ username: process.env.ADMIN_USERNAME });
+  res.cookie(cookieName, createAdminToken(username), getCookieOptions());
+  return res.json({ username: username || "admin" });
 }
 
 export function getSession(req, res) {
-  return res.json({ username: req.admin.sub });
+  return res.json({ username: req.admin?.sub || "admin" });
 }
 
 export function logout(_req, res) {
