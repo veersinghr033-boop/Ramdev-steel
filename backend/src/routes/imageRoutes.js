@@ -1,5 +1,9 @@
 import { Router } from "express";
-import { getImages, uploadImage } from "../controllers/imageController.js";
+import {
+  deleteImage,
+  getImages,
+  uploadImage,
+} from "../controllers/imageController.js";
 import { requireAdmin } from "../middleware/requireAdmin.js";
 import {
   uploadImageFile,
@@ -8,6 +12,7 @@ import {
 
 const router = Router();
 router.get("/", requireAdmin, getImages);
+router.delete("/", requireAdmin, deleteImage);
 router.post(
   "/",
   requireAdmin,

@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
-import { FiCheck, FiCopy, FiImage, FiUploadCloud, FiX } from "react-icons/fi";
+import { FiCheck, FiCopy, FiImage, FiTrash2, FiUploadCloud, FiX } from "react-icons/fi";
 import { contentDefaults } from "../data/contentDefaults";
 import {
     getApiErrorMessage,
-    getAdminSession,
+    deleteAdminImage,
     getUploadedImages,
     loginAdmin,
     logoutAdmin,
@@ -23,6 +23,15 @@ const groups = [
 ];
 const labels = Object.fromEntries(groups.flatMap((group) => group.keys.map((key) => [key, key.replace(/([A-Z])/g, " $1").replace(/^./, (letter) => letter.toUpperCase())])));
 const cloneContent = (content) => JSON.parse(JSON.stringify(content));
+
+function containsImageUrl(value, imageUrl) {
+    if (value === imageUrl) return true;
+    if (Array.isArray(value)) return value.some((item) => containsImageUrl(item, imageUrl));
+    if (value && typeof value === "object") {
+        return Object.values(value).some((item) => containsImageUrl(item, imageUrl));
+    }
+    return false;
+}
 
 function AdminLogin({ onLogin }) {
     const [username, setUsername] = useState("");
@@ -73,6 +82,7 @@ function AdminPanel() {
     const [imagePreview, setImagePreview] = useState("");
     const imagePreviewUrl = useRef("");
     const [uploading, setUploading] = useState(false);
+    const [deletingImage, setDeletingImage] = useState("");
     const [uploadProgress, setUploadProgress] = useState(0);
     const [isDraggingImage, setIsDraggingImage] = useState(false);
     const [busy, setBusy] = useState(false);
@@ -175,7 +185,7 @@ function AdminPanel() {
         setError("");
         try {
             const result = await uploadAdminImage(selectedImage, setUploadProgress);
-            setImages((current) => [{ name: result.name, url: result.url, size: result.size }, ...current]);
+            setImages((current) => [{ filename: result.filename, name: result.name, url: result.url, size: result.size }, ...current]);
             setNotice(`Uploaded ${result.name}. Copy its URL into an image field in your JSON data.`);
             clearImageSelection();
         } catch (uploadError) {
@@ -192,6 +202,35 @@ function AdminPanel() {
             setNotice("Image URL copied. Paste it into the image field in your selected content.");
         } catch {
             setNotice(`Image URL: ${url}`);
+        }
+    };
+
+    const deleteImage = async (image) => {
+        if (!image.filename) {
+            setError("This image cannot be deleted because it has no storage ID.");
+            return;
+        }
+        if (image.filename.startsWith("ramdev-steel/site-assets/")) {
+            setError("Built-in site images are protected from deletion.");
+            return;
+        }
+        if (containsImageUrl(savedContent, image.url) || containsImageUrl(drafts, image.url)) {
+            setError("This image is used by site content. Replace or remove that reference before deleting it.");
+            return;
+        }
+        if (!window.confirm(`Permanently delete “${image.name}” from the media library?`)) return;
+
+        setDeletingImage(image.filename);
+        setError("");
+        setNotice("");
+        try {
+            await deleteAdminImage(image.filename);
+            setImages((current) => current.filter((entry) => entry.filename !== image.filename));
+            setNotice(`Deleted ${image.name}.`);
+        } catch (deleteError) {
+            setError(getApiErrorMessage(deleteError));
+        } finally {
+            setDeletingImage("");
         }
     };
 
@@ -218,8 +257,8 @@ function AdminPanel() {
                 </div>
             </header>
 
-            <main className="mx-auto grid max-w-375 gap-6 px-4 py-6 sm:px-7 lg:grid-cols-[270px_minmax(0,1fr)]">
-                <aside className="h-fit rounded-2xl border border-slate-200 bg-white p-4 shadow-sm">
+            <main className="mx-auto grid max-w-375 gap-4 px-3 py-4 sm:gap-6 sm:px-7 sm:py-6 lg:grid-cols-[270px_minmax(0,1fr)]">
+                <aside className="hidden h-fit rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:block">
                     <div className="mb-4 px-2"><p className="text-xs font-black uppercase tracking-widest text-slate-400">Manage</p><p className="mt-1 text-sm text-slate-600">Content groups</p></div>
                     <nav className="space-y-5">
                         {groups.map((group) => <div key={group.title}>
@@ -231,6 +270,23 @@ function AdminPanel() {
                 </aside>
 
                 <section className="min-w-0 space-y-5">
+                    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:hidden">
+                        <label htmlFor="admin-content-section" className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-500">Manage content</label>
+                        <select
+                            id="admin-content-section"
+                            value={activeKey}
+                            onChange={(event) => setActiveKey(event.target.value)}
+                            className="w-full rounded-xl border border-slate-200 bg-white px-3.5 py-3 text-sm font-bold text-slate-800 outline-none focus:border-orange-400 focus:ring-4 focus:ring-orange-100"
+                        >
+                            {groups.map((group) => (
+                                <optgroup key={group.title} label={group.title}>
+                                    {group.keys.map((key) => <option key={key} value={key}>{labels[key]}</option>)}
+                                </optgroup>
+                            ))}
+                        </select>
+                        <button type="button" onClick={resetToDefaults} className="mt-3 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-bold text-slate-600 hover:border-orange-300 hover:text-orange-700">Restore original content</button>
+                    </div>
+
                     <div className="flex flex-col justify-between gap-4 rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:flex-row sm:items-center sm:px-7 sm:py-6">
                         <div>
                             <p className="text-xs font-black uppercase tracking-widest text-orange-700">{activeGroup?.title}</p>
@@ -338,9 +394,16 @@ function AdminPanel() {
                                             </div>
                                             <div className="p-3">
                                                 <p className="truncate text-xs font-bold text-slate-700" title={image.name}>{image.name}</p>
-                                                <button type="button" onClick={() => copyImageUrl(image.url)} className="mt-2 inline-flex w-full items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-2 py-2 text-xs font-bold text-slate-700 transition hover:bg-orange-100 hover:text-orange-800">
-                                                    <FiCopy aria-hidden="true" className="h-3.5 w-3.5" />Copy image URL
-                                                </button>
+                                                <div className="mt-2 flex gap-2">
+                                                    <button type="button" onClick={() => copyImageUrl(image.url)} className="inline-flex min-w-0 flex-1 items-center justify-center gap-1.5 rounded-lg bg-slate-100 px-2 py-2 text-xs font-bold text-slate-700 transition hover:bg-orange-100 hover:text-orange-800">
+                                                        <FiCopy aria-hidden="true" className="h-3.5 w-3.5 shrink-0" /><span className="truncate">Copy URL</span>
+                                                    </button>
+                                                    {!image.filename?.startsWith("ramdev-steel/site-assets/") && (
+                                                        <button type="button" onClick={() => deleteImage(image)} disabled={deletingImage === image.filename} aria-label={`Delete ${image.name}`} title="Delete image" className="inline-flex shrink-0 items-center justify-center rounded-lg border border-red-100 px-3 py-2 text-red-600 transition hover:bg-red-50 disabled:cursor-wait disabled:opacity-50">
+                                                            {deletingImage === image.filename ? <span className="h-4 w-4 animate-spin rounded-full border-2 border-red-200 border-t-red-600" /> : <FiTrash2 aria-hidden="true" className="h-4 w-4" />}
+                                                        </button>
+                                                    )}
+                                                </div>
                                             </div>
                                         </article>
                                     ))}

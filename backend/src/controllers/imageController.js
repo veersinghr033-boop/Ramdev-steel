@@ -1,4 +1,5 @@
 import {
+  deleteUploadedImage,
   findUploadedImage,
   listUploadedImages,
   openImageDownloadStream,
@@ -13,6 +14,20 @@ export async function getImages(_req, res, next) {
   }
 }
 
+export async function deleteImage(req, res, next) {
+  const filename = req.query.filename;
+  if (typeof filename !== "string" || !filename) {
+    return res.status(400).json({ message: "An image storage ID is required" });
+  }
+  try {
+    const deleted = await deleteUploadedImage(filename);
+    if (!deleted) return res.status(404).json({ message: "Image not found" });
+    return res.json({ message: "Image deleted" });
+  } catch (error) {
+    return next(error);
+  }
+}
+
 export async function uploadImage(req, res, next) {
   if (!req.file)
     return res.status(400).json({ message: "Choose an image to upload" });
@@ -22,6 +37,7 @@ export async function uploadImage(req, res, next) {
       url:
         storedImage.url ||
         `/uploads/${encodeURIComponent(storedImage.filename)}`,
+      filename: storedImage.filename,
       name: req.file.originalname,
       size: req.file.size,
     });

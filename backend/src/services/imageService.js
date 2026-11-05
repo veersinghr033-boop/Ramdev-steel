@@ -93,6 +93,59 @@ export async function saveUploadedImage(file) {
   };
 }
 
+export async function deleteUploadedImage(filename) {
+  if (typeof filename !== "string" || !filename.trim()) {
+    const error = new Error("An image storage ID is required");
+    error.status = 400;
+    throw error;
+  }
+
+  if (
+    filename === "ramdev-steel/site-assets" ||
+    filename.startsWith("ramdev-steel/site-assets/")
+  ) {
+    const error = new Error("Built-in site images cannot be deleted");
+    error.status = 403;
+    throw error;
+  }
+
+  if (filename.startsWith("ramdev-steel/")) {
+    if (!/^ramdev-steel\/[\w-]+$/.test(filename)) {
+      const error = new Error("Invalid image storage ID");
+      error.status = 400;
+      throw error;
+    }
+    if (
+      !cloudinary ||
+      !process.env.CLOUDINARY_CLOUD_NAME ||
+      !process.env.CLOUDINARY_API_KEY ||
+      !process.env.CLOUDINARY_API_SECRET
+    ) {
+      const error = new Error("Cloudinary is not configured");
+      error.status = 503;
+      throw error;
+    }
+
+    const result = await cloudinary.uploader.destroy(filename, {
+      invalidate: true,
+      resource_type: "image",
+    });
+    return result.result === "ok";
+  }
+
+  if (!/^[A-Za-z0-9][A-Za-z0-9_.-]*$/.test(filename) || filename === "..") {
+    const error = new Error("Invalid image storage ID");
+    error.status = 400;
+    throw error;
+  }
+
+  const bucket = getImageBucket();
+  const image = await bucket.find({ filename }).limit(1).next();
+  if (!image) return false;
+  await bucket.delete(image._id);
+  return true;
+}
+
 export async function findUploadedImage(filename) {
   return getImageBucket()
     .find({ filename })

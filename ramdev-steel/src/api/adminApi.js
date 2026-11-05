@@ -7,6 +7,8 @@ export const getAdminSession = async () =>
 export const logoutAdmin = () => apiClient.post("/admin/logout");
 export const getUploadedImages = async () =>
   (await apiClient.get("/admin/images")).data;
+export const deleteAdminImage = async (filename) =>
+  (await apiClient.delete("/admin/images", { params: { filename } })).data;
 export const uploadAdminImage = async (file, onProgress) => {
   const formData = new FormData();
   formData.append("image", file);
