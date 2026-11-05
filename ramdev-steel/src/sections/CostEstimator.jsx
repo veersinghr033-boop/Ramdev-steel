@@ -4,7 +4,7 @@ import { FiCheck, FiCheckCircle, FiCopy, FiPlus, FiZap } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 
 function CostEstimator({ onShowToast }) {
-  const { workTypes, steelGrades, finishOptions } = useSiteContent();
+  const { workTypes, steelGrades, finishOptions, steelMarketRates = [], gradeComparison = [] } = useSiteContent();
   const [selectedTypeId, setSelectedTypeId] = useState(workTypes[0].id);
   const [selectedGradeId, setSelectedGradeId] = useState(steelGrades[0].id);
   const [selectedFinishId, setSelectedFinishId] = useState(finishOptions[0].id);
@@ -54,9 +54,17 @@ function CostEstimator({ onShowToast }) {
   ]);
 
   const handleSendWhatsApp = () => {
-    const message = `*Ramdev Steel - Quotation Request*%0A%0A` +
+    const warranty =
+      selectedGrade.id === "316"
+        ? "25 Years Marine Guarantee"
+        : selectedGrade.id === "202"
+        ? "5 Years Indoor Warranty"
+        : "15 Years Prime Anti-Rust Guarantee";
+
+    const message =
+      `*Ramdev Steel - Quotation Request*%0A%0A` +
       `*Work Type:* ${selectedType.name}%0A` +
-      `*Steel Grade:* ${selectedGrade.name}%0A` +
+      `*Steel Grade:* ${selectedGrade.name} (${warranty})%0A` +
       `*Finish:* ${selectedFinish.name}%0A` +
       `*Quantity:* ${quantity} ${selectedType.unit}%0A` +
       (hasToughenedGlass ? `*Addon:* 12mm Toughened Glass%0A` : "") +
@@ -69,9 +77,16 @@ function CostEstimator({ onShowToast }) {
   };
 
   const handleCopyQuote = () => {
+    const warranty =
+      selectedGrade.id === "316"
+        ? "25 Years Marine Guarantee"
+        : selectedGrade.id === "202"
+        ? "5 Years Indoor Warranty"
+        : "15 Years Prime Anti-Rust Guarantee";
+
     const text = `Ramdev Steel Fabrication Estimate:
 Work: ${selectedType.name}
-Grade: ${selectedGrade.name}
+Grade: ${selectedGrade.name} (${warranty})
 Finish: ${selectedFinish.name}
 Size: ${quantity} ${selectedType.unit}
 Est. Rate: ~₹${calculation.unitRate}/${selectedType.unit.split(" ")[0]}
@@ -157,12 +172,22 @@ Call: +91 94688 15735`;
 
               {/* Step 2: SS Grade */}
               <div className="w-full min-w-0">
-                <label className="text-xs font-bold uppercase tracking-wider text-orange-700">
-                  Step 2: Choose Stainless Steel Grade
-                </label>
+                <div className="flex items-center justify-between gap-2">
+                  <label className="text-xs font-bold uppercase tracking-wider text-orange-700">
+                    Step 2: Choose Stainless Steel Grade
+                  </label>
+                  <span className="text-[11px] font-bold text-slate-500">
+                    Market rates updated live by grade
+                  </span>
+                </div>
                 <div className="mt-3 grid gap-2.5 sm:grid-cols-3 w-full min-w-0">
                   {steelGrades.map((grade) => {
                     const isSelected = selectedGrade.id === grade.id;
+                    const live = steelMarketRates.find((r) => r.grade.includes(grade.id));
+                    let gradeRate = selectedType.baseRate304;
+                    if (grade.id === "316") gradeRate = selectedType.baseRate316;
+                    if (grade.id === "202") gradeRate = selectedType.baseRate202;
+
                     return (
                       <button
                         key={grade.id}
@@ -173,10 +198,20 @@ Call: +91 94688 15735`;
                           : "border-slate-200/90 bg-white hover:border-slate-300 hover:bg-slate-50/70"
                           }`}
                       >
-                        <span className="text-sm font-bold text-slate-900 block wrap-break-word">{grade.name}</span>
-                        <span className="mt-1 inline-block text-[10px] font-bold text-orange-700 bg-orange-100/70 px-2 py-0.5 rounded-full border border-orange-200">
-                          {grade.tag}
-                        </span>
+                        <div className="flex items-start justify-between gap-1">
+                          <span className="text-sm font-bold text-slate-900 block wrap-break-word">{grade.name}</span>
+                          <span className="text-xs font-black text-orange-600 bg-orange-100/80 px-2 py-0.5 rounded-lg border border-orange-200 shrink-0">
+                            ₹{gradeRate?.toLocaleString()}
+                          </span>
+                        </div>
+                        <div className="mt-1 flex items-center justify-between gap-1">
+                          <span className="inline-block text-[10px] font-bold text-orange-700 bg-orange-100/70 px-2 py-0.5 rounded-full border border-orange-200">
+                            {grade.tag}
+                          </span>
+                          <span className="text-[10px] text-slate-500 font-bold bg-slate-100 px-1.5 py-0.5 rounded">
+                            {live ? `₹${live.pricePerKg}/kg` : `/${selectedType.unit.split(" ")[0]}`}
+                          </span>
+                        </div>
                         <p className="mt-1.5 text-[11px] text-slate-500 line-clamp-2 leading-relaxed wrap-break-word">{grade.desc}</p>
                       </button>
                     );
@@ -365,9 +400,48 @@ Call: +91 94688 15735`;
                     <span className="text-slate-500">Design Type:</span>
                     <span className="font-bold text-slate-900">{selectedType.name}</span>
                   </div>
-                  <div className="flex justify-between">
+                  <div className="flex justify-between items-center">
                     <span className="text-slate-500">Steel Grade:</span>
-                    <span className="font-bold text-orange-700">{selectedGrade.name}</span>
+                    <span className="font-bold text-orange-700">
+                      {selectedGrade.name} (₹
+                      {(selectedGrade.id === "316"
+                        ? selectedType.baseRate316
+                        : selectedGrade.id === "202"
+                        ? selectedType.baseRate202
+                        : selectedType.baseRate304
+                      )?.toLocaleString()}/
+                      {selectedType.unit.split(" ")[0]})
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-[11px]">
+                    <span className="text-slate-500">Anti-Rust Warranty:</span>
+                    <span className="font-bold text-emerald-700 bg-emerald-50 px-2 py-0.5 rounded border border-emerald-200">
+                      {selectedGrade.id === "316"
+                        ? "25 Years Marine Guarantee"
+                        : selectedGrade.id === "202"
+                        ? "5 Years Indoor Warranty"
+                        : "15 Years Prime Guarantee"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-[11px]">
+                    <span className="text-slate-500">Weather Suitability:</span>
+                    <span className="font-semibold text-slate-800">
+                      {selectedGrade.id === "316"
+                        ? "100% Saltwater & Chemical Immune"
+                        : selectedGrade.id === "202"
+                        ? "Covered Indoor Dry Area"
+                        : "100% Outdoor Weatherproof"}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center text-[11px]">
+                    <span className="text-slate-500">Alloy Composition:</span>
+                    <span className="font-semibold text-slate-800">
+                      {selectedGrade.id === "316"
+                        ? "18% Cr + 10% Ni + 2% Molybdenum"
+                        : selectedGrade.id === "202"
+                        ? "14-16% Cr + 1% Ni (Manganese)"
+                        : "18% Cr + 8% Ni (18/8 Steel)"}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-500">Surface Finish:</span>

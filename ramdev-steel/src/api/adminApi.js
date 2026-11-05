@@ -7,10 +7,17 @@ export const getAdminSession = async () =>
 export const logoutAdmin = () => apiClient.post("/admin/logout");
 export const getUploadedImages = async () =>
   (await apiClient.get("/admin/images")).data;
-export const uploadAdminImage = async (file) => {
+export const uploadAdminImage = async (file, onProgress) => {
   const formData = new FormData();
   formData.append("image", file);
-  return (await apiClient.post("/admin/images", formData)).data;
+  return (
+    await apiClient.post("/admin/images", formData, {
+      onUploadProgress: (event) => {
+        if (event.total)
+          onProgress?.(Math.round((event.loaded / event.total) * 100));
+      },
+    })
+  ).data;
 };
 export const getApiErrorMessage = (error) =>
   error.response?.data?.message || error.message || "Request failed";

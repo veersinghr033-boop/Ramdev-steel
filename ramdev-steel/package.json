@@ -5,7 +5,8 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "server": "node backend/src/server.js",
+    "server": "npm --prefix ../backend run dev",
+    "seed": "npm --prefix ../backend run seed",
     "dev:full": "concurrently \"npm:server\" \"npm:dev\"",
     "build": "vite build",
     "lint": "eslint .",

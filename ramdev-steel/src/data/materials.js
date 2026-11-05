@@ -1,3 +1,39 @@
+export const steelMarketRates = [
+  {
+    id: 1,
+    grade: "SS 304",
+    title: "Architectural & Balcony Prime",
+    pricePerKg: 245,
+    pricePerRft: 1450,
+    unit: "₹ / kg",
+    trend: "Stable",
+    updatedDate: "Today's Live Rate",
+    badge: "Most Popular",
+  },
+  {
+    id: 2,
+    grade: "SS 316",
+    title: "Marine & Chemical Grade",
+    pricePerKg: 340,
+    pricePerRft: 1950,
+    unit: "₹ / kg",
+    trend: "Up",
+    updatedDate: "Today's Live Rate",
+    badge: "Maximum Durability",
+  },
+  {
+    id: 3,
+    grade: "SS 202",
+    title: "Economical Interior Grade",
+    pricePerKg: 145,
+    pricePerRft: 950,
+    unit: "₹ / kg",
+    trend: "Stable",
+    updatedDate: "Today's Live Rate",
+    badge: "Budget Interior",
+  },
+];
+
 export const gradeComparison = [
   {
     grade: "SS 304",

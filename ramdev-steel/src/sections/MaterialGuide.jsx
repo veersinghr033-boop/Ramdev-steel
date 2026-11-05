@@ -4,7 +4,7 @@ import { FiBookOpen, FiStar } from "react-icons/fi";
 import { FaLightbulb } from "react-icons/fa";
 
 function MaterialGuide() {
-  const { gradeComparison, finishes, careTips } = useSiteContent();
+  const { gradeComparison, finishes, careTips, steelMarketRates = [] } = useSiteContent();
   const [activeTab, setActiveTab] = useState("grades");
 
   return (
@@ -65,65 +65,107 @@ function MaterialGuide() {
         {/* Tab 1: Grades Comparison */}
         {activeTab === "grades" && (
           <div className="mt-8 grid gap-6 md:grid-cols-3 w-full min-w-0 reveal-scale delay-100">
-            {gradeComparison.map((item) => (
-              <div
-                key={item.grade}
-                className={`relative rounded-3xl border p-4 sm:p-7 flex flex-col justify-between transition duration-300 w-full min-w-0 hover:-translate-y-1 hover:shadow-lg ${item.isPopular
-                  ? "border-orange-400 bg-linear-to-b from-orange-50/80 via-white to-white shadow-lg shadow-orange-500/5 ring-1 ring-orange-400/30"
-                  : "border-slate-200/90 bg-white shadow-sm hover:border-slate-300"
-                  }`}
-              >
-                {item.isPopular && (
-                  <span className="absolute -top-3 right-4 sm:right-6 rounded-full bg-orange-600 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white shadow-md shrink-0 z-10 animate-soft-ring">
-                    Most Popular Choice
-                  </span>
-                )}
-
-                <div>
-                  <div className="flex flex-wrap items-center justify-between gap-2">
-                    <h3 className="text-2xl font-black text-slate-900">{item.grade}</h3>
-                    <span className="text-[11px] font-bold text-orange-700 bg-orange-100/70 px-2.5 py-0.5 rounded-full border border-orange-200 shrink-0">
-                      {item.costRating}
+            {gradeComparison.map((item) => {
+              const liveRate = steelMarketRates.find((r) => r.grade === item.grade);
+              return (
+                <div
+                  key={item.grade}
+                  className={`relative rounded-3xl border p-4 sm:p-7 flex flex-col justify-between transition duration-300 w-full min-w-0 hover:-translate-y-1 hover:shadow-lg ${item.isPopular
+                    ? "border-orange-400 bg-linear-to-b from-orange-50/80 via-white to-white shadow-lg shadow-orange-500/5 ring-1 ring-orange-400/30"
+                    : "border-slate-200/90 bg-white shadow-sm hover:border-slate-300"
+                    }`}
+                >
+                  {item.isPopular && (
+                    <span className="absolute -top-3 right-4 sm:right-6 rounded-full bg-orange-600 px-3 py-1 text-[10px] font-extrabold uppercase tracking-wider text-white shadow-md shrink-0 z-10 animate-soft-ring">
+                      Most Popular Choice
                     </span>
+                  )}
+
+                  <div>
+                    <div className="flex flex-wrap items-center justify-between gap-2">
+                      <h3 className="text-2xl font-black text-slate-900">{item.grade}</h3>
+                      <span className="text-[11px] font-bold text-orange-700 bg-orange-100/70 px-2.5 py-0.5 rounded-full border border-orange-200 shrink-0">
+                        {item.costRating}
+                      </span>
+                    </div>
+                    <p className="mt-1.5 text-xs font-bold text-slate-700">{item.title}</p>
+
+                    <div className="mt-5 space-y-3 border-t border-slate-100 pt-4 text-xs">
+                      {liveRate ? (
+                        <div className="rounded-2xl bg-orange-50/90 p-3 border border-orange-200/90 shadow-sm">
+                          <div className="flex items-center justify-between text-[11px] font-bold text-orange-950">
+                            <span className="flex items-center gap-1.5">
+                              <span className="h-2 w-2 rounded-full bg-emerald-500 animate-pulse" />
+                              Live Market Rate:
+                            </span>
+                            <span className="text-[10px] font-bold text-orange-800 bg-orange-100/90 px-2 py-0.5 rounded-full border border-orange-200">
+                              {liveRate.updatedDate || "Live Rate"}
+                            </span>
+                          </div>
+                          <div className="mt-2 flex items-baseline justify-between border-t border-orange-200/50 pt-1.5">
+                            <div>
+                              <span className="text-base font-black text-slate-900">
+                                ₹{liveRate.pricePerKg}
+                              </span>
+                              <span className="text-[11px] font-semibold text-slate-500"> / kg raw</span>
+                            </div>
+                            <div className="text-right">
+                              <span className="text-xs font-black text-orange-700">
+                                ~₹{liveRate.pricePerRft?.toLocaleString()}
+                              </span>
+                              <span className="text-[10px] font-semibold text-slate-500"> / RFT fab</span>
+                            </div>
+                          </div>
+                        </div>
+                      ) : (
+                        <div className="flex items-center justify-between rounded-xl bg-orange-50/80 px-3 py-2 border border-orange-200/80">
+                          <span className="text-[11px] font-bold text-orange-900">Indicative Rate:</span>
+                          <span className="text-xs font-black text-orange-700">
+                            {item.grade.includes("304")
+                              ? "₹1,100 – ₹1,650 / RFT"
+                              : item.grade.includes("316")
+                                ? "₹1,550 – ₹2,200 / RFT"
+                                : "₹750 – ₹1,250 / RFT"}
+                          </span>
+                        </div>
+                      )}
+
+                      <div>
+                        <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">Chemical Alloy</span>
+                        <p className="font-semibold text-slate-800 mt-0.5">{item.alloy}</p>
+                      </div>
+
+                      <div>
+                        <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">Rust Resistance</span>
+                        <p className="mt-0.5 flex flex-wrap items-center gap-1 font-semibold text-slate-800">
+                          <span className="inline-flex text-amber-400" aria-label={`${item.rustRating} out of 5 stars`}>
+                            {Array.from({ length: 5 }, (_, index) => (
+                              <FiStar key={index} aria-hidden="true" className={`h-3.5 w-3.5 ${index < item.rustRating ? "fill-current" : "text-slate-200"}`} />
+                            ))}
+                          </span>
+                          <span>{item.rustResistance}</span>
+                        </p>
+                      </div>
+
+                      <div>
+                        <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">Weather Proofing</span>
+                        <p className="font-semibold text-slate-800 mt-0.5">{item.weatherProof}</p>
+                      </div>
+
+                      <div>
+                        <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">Recommended For</span>
+                        <p className="font-semibold text-slate-700 mt-0.5 leading-relaxed">{item.suitability}</p>
+                      </div>
+                    </div>
                   </div>
-                  <p className="mt-1.5 text-xs font-bold text-slate-700">{item.title}</p>
 
-                  <div className="mt-5 space-y-3 border-t border-slate-100 pt-4 text-xs">
-                    <div>
-                      <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">Chemical Alloy</span>
-                      <p className="font-semibold text-slate-800 mt-0.5">{item.alloy}</p>
-                    </div>
-
-                    <div>
-                      <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">Rust Resistance</span>
-                      <p className="mt-0.5 flex flex-wrap items-center gap-1 font-semibold text-slate-800">
-                        <span className="inline-flex text-amber-400" aria-label={`${item.rustRating} out of 5 stars`}>
-                          {Array.from({ length: 5 }, (_, index) => (
-                            <FiStar key={index} aria-hidden="true" className={`h-3.5 w-3.5 ${index < item.rustRating ? "fill-current" : "text-slate-200"}`} />
-                          ))}
-                        </span>
-                        <span>{item.rustResistance}</span>
-                      </p>
-                    </div>
-
-                    <div>
-                      <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">Weather Proofing</span>
-                      <p className="font-semibold text-slate-800 mt-0.5">{item.weatherProof}</p>
-                    </div>
-
-                    <div>
-                      <span className="text-slate-400 uppercase tracking-wider text-[10px] font-bold">Recommended For</span>
-                      <p className="font-semibold text-slate-700 mt-0.5 leading-relaxed">{item.suitability}</p>
-                    </div>
+                  <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-3.5 text-xs text-slate-600 leading-relaxed">
+                    <span className="font-bold text-slate-900">Fabricator Insight: </span>
+                    {item.recommendation}
                   </div>
                 </div>
-
-                <div className="mt-6 rounded-2xl border border-slate-200 bg-slate-50 p-3.5 text-xs text-slate-600 leading-relaxed">
-                  <span className="font-bold text-slate-900">Fabricator Insight: </span>
-                  {item.recommendation}
-                </div>
-              </div>
-            ))}
+              )
+            })}
           </div>
         )}
 

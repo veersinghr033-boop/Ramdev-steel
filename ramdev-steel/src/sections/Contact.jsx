@@ -1,19 +1,20 @@
 import { useState } from "react";
+import { useSiteContent } from "../data/siteContent";
 import { FiPhoneCall, FiMail, FiMapPin, FiCheckCircle, FiSend, FiArrowRight, FiClock, FiTool } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 
 function Contact({ prefilledProduct = "" }) {
+  const { services: mongoServices = [], products: mongoProducts = [] } = useSiteContent();
   const [submitted, setSubmitted] = useState(false);
   const [needsSiteVisit, setNeedsSiteVisit] = useState(false);
 
-  const services = [
+  const dynamicServiceOptions = [
     "Select a service",
-    "Steel Fabrication",
-    "Railings & Balconies",
-    "Gates & Grills",
-    "Structural Steel",
+    ...mongoServices.map((service) => service.title),
+    ...mongoProducts.map((product) => product.name),
     "Other",
   ];
+  const services = Array.from(new Set(dynamicServiceOptions));
   const gradeOptions = ["No preference", "Mild Steel", "Stainless Steel", "Other"];
 
   const [formData, setFormData] = useState({

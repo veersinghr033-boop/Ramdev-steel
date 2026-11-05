@@ -1,8 +1,10 @@
 import logo from "../assets/logo.jpg";
+import { useSiteContent } from "../data/siteContent";
 import { FiArrowUp, FiClock, FiMail, FiMapPin, FiPhoneCall } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 
 function Footer() {
+  const { products: mongoProducts = [] } = useSiteContent();
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
   };
@@ -20,14 +22,17 @@ function Footer() {
     { name: "Contact", href: "#contact" },
   ];
 
-  const productLinks = [
-    "Modern SS Balcony Railing",
-    "Frameless SS Glass Railing",
-    "CNC Laser Cut Entrance Gate",
-    "SS Safety Window Grill",
-    "Curved Staircase Balustrade",
-    "Designer SS Furniture",
-  ];
+  const productLinks =
+    mongoProducts.length > 0
+      ? mongoProducts.slice(0, 6).map((product) => product.name)
+      : [
+          "Modern SS Balcony Railing",
+          "Frameless SS Glass Railing",
+          "CNC Laser Cut Entrance Gate",
+          "SS Safety Window Grill",
+          "Curved Staircase Balustrade",
+          "Designer SS Furniture",
+        ];
 
   return (
     <footer className="relative bg-slate-950 text-slate-400 border-t border-slate-800/80 pt-12 pb-8 overflow-hidden w-full max-w-full">
