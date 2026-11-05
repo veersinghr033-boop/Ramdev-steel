@@ -1,9 +1,17 @@
-import modernBalconyImg from "../assets/product/Modern Glass Balcony at Sunset.png";
-import framelessGlassImg from "../assets/product/Frameless Glass Balcony at Sunset.png";
-import laserCutGateImg from "../assets/product/Luxurious Botanical Laser-Cut Gate at Dusk.png";
-import windowGrillImg from "../assets/product/Modern Window Grill Design Showcase.png";
-import hardwareFittingsImg from "../assets/product/Stainless Glass Railing Hardware Guide.png";
-import steelFurnitureImg from "../assets/product/Stainless Steel Design Portfolio Collage.png";
+import { cloudinaryAssets } from "./cloudinaryAssets";
+
+const modernBalconyImg =
+  cloudinaryAssets["product/Modern Glass Balcony at Sunset.png"];
+const framelessGlassImg =
+  cloudinaryAssets["product/Frameless Glass Balcony at Sunset.png"];
+const laserCutGateImg =
+  cloudinaryAssets["product/Luxurious Botanical Laser-Cut Gate at Dusk.png"];
+const windowGrillImg =
+  cloudinaryAssets["product/Modern Window Grill Design Showcase.png"];
+const hardwareFittingsImg =
+  cloudinaryAssets["product/Stainless Glass Railing Hardware Guide.png"];
+const steelFurnitureImg =
+  cloudinaryAssets["product/Stainless Steel Design Portfolio Collage.png"];
 
 export const productImages = [
   modernBalconyImg,

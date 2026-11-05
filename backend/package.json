@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "nodemon --watch src --ext js,json src/server.js",
     "start": "node src/server.js",
-    "seed": "node src/scripts/seed.js"
+    "seed": "node src/scripts/seed.js",
+    "upload:assets": "node src/scripts/uploadStaticAssets.js",
+    "list:assets": "node src/scripts/listStaticAssets.js"
   },
   "dependencies": {
     "cloudinary": "^2.5.1",

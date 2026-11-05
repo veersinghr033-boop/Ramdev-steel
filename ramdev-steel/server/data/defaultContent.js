@@ -43,7 +43,8 @@ export const defaultContent = {
       thickness: "1.5mm - 2.0mm Gauge",
       description:
         "Engineered multi-tier stainless steel railing with ergonomic top handrail and horizontal safety pipes. Designed for extreme outdoor weather.",
-      image: "/src/assets/product/Modern Glass Balcony at Sunset.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878837/ramdev-steel/site-assets/product/modern-glass-balcony-at-sunset.png",
       tag: "Bestseller",
       specs: {
         height: "3.0 - 3.5 Feet Standard",
@@ -60,7 +61,8 @@ export const defaultContent = {
       thickness: "12mm Toughened Glass",
       description:
         "Ultra-modern architectural glass balcony system with heavy-duty solid stainless steel spigots and continuous base channel profile.",
-      image: "/src/assets/product/Frameless Glass Balcony at Sunset.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878806/ramdev-steel/site-assets/product/frameless-glass-balcony-at-sunset.png",
       tag: "Luxury",
       specs: {
         height: "3.2 - 4.0 Feet",
@@ -77,7 +79,8 @@ export const defaultContent = {
       thickness: "2.0mm Frame + 3mm Sheet",
       description:
         "Custom-designed grand entrance gate featuring intricate CNC laser cut lattice patterns, heavy-duty ball-bearing hinges, and anti-sag structure.",
-      image: "/src/assets/product/Luxurious Botanical Laser-Cut Gate at Dusk.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878822/ramdev-steel/site-assets/product/luxurious-botanical-laser-cut-gate-at-dusk.png",
       tag: "Custom Made",
       specs: {
         automation: "Compatible with remote sliding / swing motors",
@@ -94,7 +97,8 @@ export const defaultContent = {
       thickness: "16mm - 19mm Diameter",
       description:
         "Elegant decorative safety grills for residential windows and balconies. Provides robust intrusion security with clean unobstructed outdoor views.",
-      image: "/src/assets/product/Modern Window Grill Design Showcase.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878852/ramdev-steel/site-assets/product/modern-window-grill-design-showcase.png",
       tag: "High Security",
       specs: {
         welding: "Complete 360° Argon TIG Welded Joint",
@@ -111,7 +115,8 @@ export const defaultContent = {
       thickness: "Solid Heavy Forging",
       description:
         "Heavy-duty glass clamps, base spigots, handrail brackets, adjustable elbows, and end caps built for lifetime commercial and residential duty.",
-      image: "/src/assets/product/Stainless Glass Railing Hardware Guide.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878865/ramdev-steel/site-assets/product/stainless-glass-railing-hardware-guide.png",
       tag: "Hardware Spec",
       specs: {
         compatibility: "8mm, 10mm, 12mm Glass Panels",
@@ -128,7 +133,8 @@ export const defaultContent = {
       thickness: "1.6mm - 2.5mm",
       description:
         "Bespoke stainless steel dining table bases, console frames, center tables, and commercial kitchen fabrication built to designer blueprints.",
-      image: "/src/assets/product/Stainless Steel Design Portfolio Collage.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878880/ramdev-steel/site-assets/product/stainless-steel-design-portfolio-collage.png",
       tag: "Designer Series",
       specs: {
         topCompatibility: "Marble, Quartz, Granite, or Glass",
@@ -138,61 +144,98 @@ export const defaultContent = {
       },
     },
   ],
-  productCategories: ["All", "Railings", "Gates", "Grills", "Fittings", "Furniture"],
+  productCategories: [
+    "All",
+    "Railings",
+    "Gates",
+    "Grills",
+    "Fittings",
+    "Furniture",
+  ],
   services: [
     {
       id: 1,
       number: "01",
       title: "SS Balcony & Stair Railings",
-      deliverables: ["304/316 Grade Steel", "Precision Core Drill Anchors", "Seamless Mirror/Satin Buff"],
+      deliverables: [
+        "304/316 Grade Steel",
+        "Precision Core Drill Anchors",
+        "Seamless Mirror/Satin Buff",
+      ],
       description:
         "Engineered stainless steel railings for residential staircases, exterior balconies, ramps, and commercial atriums with strict safety load compliance.",
-      image: "/src/assets/service/Modern Staircase with Polished Steel Railing.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793879063/ramdev-steel/site-assets/service/modern-staircase-with-polished-steel-railing.png",
     },
     {
       id: 2,
       number: "02",
       title: "Frameless Glass Railings",
-      deliverables: ["12mm Toughened Glass", "SS 304 Solid Base Spigots", "Slimline Aluminum Channel"],
+      deliverables: [
+        "12mm Toughened Glass",
+        "SS 304 Solid Base Spigots",
+        "Slimline Aluminum Channel",
+      ],
       description:
         "Minimalist architectural glass railings providing uninterrupted panoramic views, optimal safety barrier, and sleek modern aesthetic.",
-      image: "/src/assets/service/Modern Glass Balcony at Sunset.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793879020/ramdev-steel/site-assets/service/modern-glass-balcony-at-sunset.png",
     },
     {
       id: 3,
       number: "03",
       title: "Designer Steel Gates",
-      deliverables: ["Anti-Sag Box Frame", "CNC Laser Cut Motifs", "Motorized Automation Ready"],
+      deliverables: [
+        "Anti-Sag Box Frame",
+        "CNC Laser Cut Motifs",
+        "Motorized Automation Ready",
+      ],
       description:
         "Grand entry gates combining high-tensile steel integrity with contemporary laser lattice designs, premium ball bearing pivots, and security deadbolts.",
-      image: "/src/assets/service/Modern Luxury Gate at Twilight.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793879028/ramdev-steel/site-assets/service/modern-luxury-gate-at-twilight.png",
     },
     {
       id: 4,
       number: "04",
       title: "Safety Grills & Partitions",
-      deliverables: ["Burglary-Resistant Rods", "Concealed Fastening", "Weather-Resistant Polish"],
+      deliverables: [
+        "Burglary-Resistant Rods",
+        "Concealed Fastening",
+        "Weather-Resistant Polish",
+      ],
       description:
         "Decorative and high-security window grills, balcony mesh frames, and interior spatial partitions tailored to modern architectural layouts.",
-      image: "/src/assets/service/Modern Evening Facade with Grilled Windows.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793879015/ramdev-steel/site-assets/service/modern-evening-facade-with-grilled-windows.png",
     },
     {
       id: 5,
       number: "05",
       title: "Custom Steel Fabrication",
-      deliverables: ["CAD Blueprinting", "TIG Argon Welding", "Custom Dimensions"],
+      deliverables: [
+        "CAD Blueprinting",
+        "TIG Argon Welding",
+        "Custom Dimensions",
+      ],
       description:
         "Made-to-order architectural steelwork, designer furniture bases, commercial kitchen counters, and structural assemblies for villas and hotels.",
-      image: "/src/assets/service/Luxury Stainless Steel Terrace Kitchen.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793879008/ramdev-steel/site-assets/service/luxury-stainless-steel-terrace-kitchen.png",
     },
     {
       id: 6,
       number: "06",
       title: "Site Installation & Finishing",
-      deliverables: ["Expert Fitting Team", "Chemical Anchor Fasteners", "Final Mirror Buffing"],
+      deliverables: [
+        "Expert Fitting Team",
+        "Chemical Anchor Fasteners",
+        "Final Mirror Buffing",
+      ],
       description:
         "End-to-end on-site installation by certified fabrication technicians ensuring perfect leveling, rigid anchoring, and scratch-free handover.",
-      image: "/src/assets/service/Modern Railing Installation Team.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793879044/ramdev-steel/site-assets/service/modern-railing-installation-team.png",
     },
   ],
   projects: [
@@ -207,7 +250,8 @@ export const defaultContent = {
       scope: "120 RFT Custom Curved & Straight Stairs",
       description:
         "A stunning architectural staircase featuring continuous seamless SS 304 tubular handrails with laser-cut baluster mounts. No visible weld joints and precision anchor stabilization.",
-      image: "/src/assets/project/Luminous Curved Staircase Foyer.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878893/ramdev-steel/site-assets/project/luminous-curved-staircase-foyer.png",
     },
     {
       id: 2,
@@ -220,7 +264,8 @@ export const defaultContent = {
       scope: "85 RFT Exterior Perimeter",
       description:
         "Frameless 12mm tempered safety glass railing engineered with solid floor spigots, weather-proof EPDM gaskets, and an ergonomic slim top capping handrail.",
-      image: "/src/assets/project/Sunset Terrace Overlooking the City and Fort.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878978/ramdev-steel/site-assets/project/sunset-terrace-overlooking-the-city-and-fort.png",
     },
     {
       id: 3,
@@ -233,7 +278,8 @@ export const defaultContent = {
       scope: "24 ft Wide Motorized Bi-Parting Gate",
       description:
         "A statement entrance combining traditional Rajasthani geometric lattice laser-cutting with heavy structural steel framework and remote motorized sliding gear.",
-      image: "/src/assets/project/Luxurious Golden-Hour Mansion Gate.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878907/ramdev-steel/site-assets/project/luxurious-golden-hour-mansion-gate.png",
     },
     {
       id: 4,
@@ -246,7 +292,8 @@ export const defaultContent = {
       scope: "14 Large Window Grills (280 SQFT)",
       description:
         "Full perimeter safety grills fabricated with 360-degree Argon welded joints, concealed anchor brackets, and easy-clean geometric intervals.",
-      image: "/src/assets/project/Warmly Lit Modern Villa Facade.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878992/ramdev-steel/site-assets/project/warmly-lit-modern-villa-facade.png",
     },
     {
       id: 5,
@@ -259,7 +306,8 @@ export const defaultContent = {
       scope: "450 RFT across 4 Atrium Floors",
       description:
         "Heavy-duty commercial railing designed for high pedestrian throughput with reinforced structural posts and rigorous municipal load testing approval.",
-      image: "/src/assets/project/Modern Glass Atrium Lobby.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878937/ramdev-steel/site-assets/project/modern-glass-atrium-lobby.png",
     },
     {
       id: 6,
@@ -272,7 +320,8 @@ export const defaultContent = {
       scope: "18 ft Width with Integrated Pedestrian Wicket",
       description:
         "Modern dual-material entry gate pairing dark PVD-coated stainless steel with weather-treated natural teakwood slats for maximum street appeal.",
-      image: "/src/assets/project/Luxury Gate at Twilight.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878924/ramdev-steel/site-assets/project/luxury-gate-at-twilight.png",
     },
   ],
   projectCategories: ["All", "Railings", "Gates", "Grills", "Commercial"],
@@ -281,7 +330,8 @@ export const defaultContent = {
       id: 1,
       category: "Railings",
       title: "Curved Staircase Balustrade",
-      image: "/src/assets/gallery/Glamorous Curved Staircase Foyer.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878748/ramdev-steel/site-assets/gallery/glamorous-curved-staircase-foyer.png",
       size: "large",
       tag: "Villa Interior",
     },
@@ -289,7 +339,8 @@ export const defaultContent = {
       id: 2,
       category: "Gates",
       title: "High-Gloss Entrance Pivot Gate",
-      image: "/src/assets/gallery/Luxurious Reflective Pivot Gate at Dusk.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878773/ramdev-steel/site-assets/gallery/luxurious-reflective-pivot-gate-at-dusk.png",
       size: "normal",
       tag: "Exterior Gate",
     },
@@ -297,7 +348,8 @@ export const defaultContent = {
       id: 3,
       category: "Grills",
       title: "Geometric Laser Safety Grill",
-      image: "/src/assets/gallery/Geometric Security Grille at Twilight.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878745/ramdev-steel/site-assets/gallery/geometric-security-grille-at-twilight.png",
       size: "normal",
       tag: "Window Security",
     },
@@ -305,7 +357,8 @@ export const defaultContent = {
       id: 4,
       category: "Railings",
       title: "Frameless Glass Balcony Edge",
-      image: "/src/assets/gallery/Luxury Glass Balcony at Sunset.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878779/ramdev-steel/site-assets/gallery/luxury-glass-balcony-at-sunset.png",
       size: "normal",
       tag: "Terrace Railing",
     },
@@ -313,7 +366,8 @@ export const defaultContent = {
       id: 5,
       category: "Furniture",
       title: "Mirror SS Dining Table Framework",
-      image: "/src/assets/gallery/Luxurious Chrome Dining Room with Lilies.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878765/ramdev-steel/site-assets/gallery/luxurious-chrome-dining-room-with-lilies.png",
       size: "normal",
       tag: "Bespoke Furniture",
     },
@@ -321,7 +375,8 @@ export const defaultContent = {
       id: 6,
       category: "Gates",
       title: "Contemporary Villa Sliding Gate",
-      image: "/src/assets/gallery/Luxury Villa Gate at Dusk.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878785/ramdev-steel/site-assets/gallery/luxury-villa-gate-at-dusk.png",
       size: "large",
       tag: "Estate Boundary",
     },
@@ -329,7 +384,8 @@ export const defaultContent = {
       id: 7,
       category: "Railings",
       title: "SS 316 Commercial Grade Railing",
-      image: "/src/assets/gallery/Modern Stainless Steel Entrance at Night.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878794/ramdev-steel/site-assets/gallery/modern-stainless-steel-entrance-at-night.png",
       size: "normal",
       tag: "Commercial Atrium",
     },
@@ -337,7 +393,8 @@ export const defaultContent = {
       id: 8,
       category: "Grills",
       title: "Architectural Pattern Safety Barrier",
-      image: "/src/assets/gallery/Illuminated Geometric Fence at Twilight.png",
+      image:
+        "https://res.cloudinary.com/j4aomd2r/image/upload/v1793878754/ramdev-steel/site-assets/gallery/illuminated-geometric-fence-at-twilight.png",
       size: "normal",
       tag: "Balcony Partition",
     },
@@ -353,7 +410,8 @@ export const defaultContent = {
       suitability: "Outdoor Balconies, Main Gates, Stairs, Commercial Railings",
       weatherProof: "100% Rust-proof in all normal outdoor weather",
       costRating: "Balanced Value & High Durability",
-      recommendation: "Our #1 choice for home & building exteriors. Maintenance-free for decades.",
+      recommendation:
+        "Our #1 choice for home & building exteriors. Maintenance-free for decades.",
       isPopular: true,
     },
     {
@@ -362,10 +420,13 @@ export const defaultContent = {
       alloy: "16% Chromium, 10% Nickel + 2% Molybdenum",
       rustRating: 5,
       rustResistance: "(Maximum Available)",
-      suitability: "Coastal regions, Swimming pools, Chemical & Food Pharma plants",
-      weatherProof: "Immune to saltwater chloride pitting and harsh industrial fumes",
+      suitability:
+        "Coastal regions, Swimming pools, Chemical & Food Pharma plants",
+      weatherProof:
+        "Immune to saltwater chloride pitting and harsh industrial fumes",
       costRating: "Premium Investment (+30-40% over 304)",
-      recommendation: "Essential if located near water bodies, factories, or extreme exposure.",
+      recommendation:
+        "Essential if located near water bodies, factories, or extreme exposure.",
       isPopular: false,
     },
     {
@@ -374,10 +435,12 @@ export const defaultContent = {
       alloy: "14-16% Chromium, 1-2% Nickel (Manganese added)",
       rustRating: 3,
       rustResistance: "(Moderate)",
-      suitability: "Covered indoor staircases, dry interior partitions, temporary fitouts",
+      suitability:
+        "Covered indoor staircases, dry interior partitions, temporary fitouts",
       weatherProof: "Not recommended for direct rain/exterior sunlight",
       costRating: "Cost-Effective Budget (-25-30% from 304)",
-      recommendation: "Good for indoor dry use when budget is the top priority.",
+      recommendation:
+        "Good for indoor dry use when budget is the top priority.",
       isPopular: false,
     },
   ],
@@ -385,20 +448,26 @@ export const defaultContent = {
     {
       id: "mirror",
       name: "High-Gloss Mirror Polish (#8)",
-      description: "Reflective chrome-like surface buffed to a lustrous shine. Easy to wipe clean and sheds dust effortlessly.",
-      bestFor: "Staircase handrails, decorative gate pillars, luxury entryways.",
+      description:
+        "Reflective chrome-like surface buffed to a lustrous shine. Easy to wipe clean and sheds dust effortlessly.",
+      bestFor:
+        "Staircase handrails, decorative gate pillars, luxury entryways.",
     },
     {
       id: "satin",
       name: "Satin / Hairline Brushed",
-      description: "Directional fine grain texture with a non-glare, contemporary matte metallic appearance. Hides minor finger smudges.",
-      bestFor: "Modern glass railings, minimalist architectural villas, corporate lobbies.",
+      description:
+        "Directional fine grain texture with a non-glare, contemporary matte metallic appearance. Hides minor finger smudges.",
+      bestFor:
+        "Modern glass railings, minimalist architectural villas, corporate lobbies.",
     },
     {
       id: "pvd",
       name: "PVD Titanium Color Coating",
-      description: "Physical Vapor Deposition coating giving permanent, scratch-resistant Royal Gold, Rose Gold, Champagne, or Matte Black.",
-      bestFor: "Boutique hotel facades, luxury villa entrance gates, designer partitions.",
+      description:
+        "Physical Vapor Deposition coating giving permanent, scratch-resistant Royal Gold, Rose Gold, Champagne, or Matte Black.",
+      bestFor:
+        "Boutique hotel facades, luxury villa entrance gates, designer partitions.",
     },
   ],
   careTips: [
@@ -426,7 +495,8 @@ export const defaultContent = {
       baseRate304: 1650,
       baseRate316: 2200,
       baseRate202: 1250,
-      description: "12mm Toughened Glass with SS 304/316 Spigots or Continuous Base Profile & Top Handrail.",
+      description:
+        "12mm Toughened Glass with SS 304/316 Spigots or Continuous Base Profile & Top Handrail.",
       popular: true,
     },
     {
@@ -439,7 +509,8 @@ export const defaultContent = {
       baseRate304: 1100,
       baseRate316: 1550,
       baseRate202: 750,
-      description: "Classic multi-pipe baluster railing with 2-inch master post and horizontal safety pipes.",
+      description:
+        "Classic multi-pipe baluster railing with 2-inch master post and horizontal safety pipes.",
       popular: false,
     },
     {
@@ -452,7 +523,8 @@ export const defaultContent = {
       baseRate304: 1450,
       baseRate316: 1950,
       baseRate202: 950,
-      description: "Heavy structural SS frame with laser-cut CNC sheets, teakwood inserts, or decorative tubes.",
+      description:
+        "Heavy structural SS frame with laser-cut CNC sheets, teakwood inserts, or decorative tubes.",
       popular: true,
     },
     {
@@ -465,7 +537,8 @@ export const defaultContent = {
       baseRate304: 680,
       baseRate316: 920,
       baseRate202: 450,
-      description: "Anti-burglary solid or hollow SS rods with clean TIG welded junction joints and flush wall mounts.",
+      description:
+        "Anti-burglary solid or hollow SS rods with clean TIG welded junction joints and flush wall mounts.",
       popular: false,
     },
     {
@@ -478,7 +551,8 @@ export const defaultContent = {
       baseRate304: 4500,
       baseRate316: 6200,
       baseRate202: 3200,
-      description: "Architectural central spine or stringer staircase with laser cut treads and integrated railings.",
+      description:
+        "Architectural central spine or stringer staircase with laser cut treads and integrated railings.",
       popular: false,
     },
   ],
@@ -506,10 +580,30 @@ export const defaultContent = {
     },
   ],
   finishOptions: [
-    { id: "mirror", name: "High Gloss Mirror Polish", extraRate: 0, tag: "Standard" },
-    { id: "satin", name: "Satin / Brushed Hairline", extraRate: 60, tag: "Modern Matte" },
-    { id: "pvd-gold", name: "PVD Titanium Gold / Rose Gold", extraRate: 450, tag: "Luxury Finish" },
-    { id: "pvd-black", name: "PVD Matte Black", extraRate: 400, tag: "Architectural" },
+    {
+      id: "mirror",
+      name: "High Gloss Mirror Polish",
+      extraRate: 0,
+      tag: "Standard",
+    },
+    {
+      id: "satin",
+      name: "Satin / Brushed Hairline",
+      extraRate: 60,
+      tag: "Modern Matte",
+    },
+    {
+      id: "pvd-gold",
+      name: "PVD Titanium Gold / Rose Gold",
+      extraRate: 450,
+      tag: "Luxury Finish",
+    },
+    {
+      id: "pvd-black",
+      name: "PVD Matte Black",
+      extraRate: 400,
+      tag: "Architectural",
+    },
   ],
   testimonials: [
     {
@@ -558,81 +652,107 @@ export const defaultContent = {
       id: 1,
       category: "Grades & Quality",
       question: "How do I know if the steel is genuine SS 304 or cheap SS 202?",
-      answer: "We provide chemical test certificates and conduct live molybdenum/nickel acid drop testing upon request. Genuine SS 304 does not turn red or dark brown under the acid drop test, ensuring 100% all-weather rust resistance.",
+      answer:
+        "We provide chemical test certificates and conduct live molybdenum/nickel acid drop testing upon request. Genuine SS 304 does not turn red or dark brown under the acid drop test, ensuring 100% all-weather rust resistance.",
     },
     {
       id: 2,
       category: "Pricing & Quotes",
       question: "How is stainless steel railing cost calculated?",
-      answer: "Railing prices are calculated per Running Foot (RFT). The rate depends on the chosen steel grade (SS 304 vs 316), tube thickness (gauge), design complexity (horizontal pipes vs vertical balusters vs 12mm toughened glass), and finish (Mirror vs Satin vs PVD Gold). Use our interactive Cost Estimator above for an instant preview!",
+      answer:
+        "Railing prices are calculated per Running Foot (RFT). The rate depends on the chosen steel grade (SS 304 vs 316), tube thickness (gauge), design complexity (horizontal pipes vs vertical balusters vs 12mm toughened glass), and finish (Mirror vs Satin vs PVD Gold). Use our interactive Cost Estimator above for an instant preview!",
     },
     {
       id: 3,
       category: "Site & Installation",
       question: "Do you provide free site visits for measurement?",
-      answer: "Yes! In Jodhpur and surrounding regions, our senior technician visits your site free of charge with optical laser levels and physical material samples to take exact measurements and provide a customized quote.",
+      answer:
+        "Yes! In Jodhpur and surrounding regions, our senior technician visits your site free of charge with optical laser levels and physical material samples to take exact measurements and provide a customized quote.",
     },
     {
       id: 4,
       category: "Grades & Quality",
       question: "Will stainless steel railings rust in outdoor rain or heat?",
-      answer: "Genuine SS 304 and SS 316 grade stainless steel will NOT rust under normal outdoor exposure, rain, or harsh summer heat. Mild surface brown spots can only occur if acidic bathroom cleaners (like Harpic) are spilled on them or if uncertified SS 202 is mistakenly used outdoors.",
+      answer:
+        "Genuine SS 304 and SS 316 grade stainless steel will NOT rust under normal outdoor exposure, rain, or harsh summer heat. Mild surface brown spots can only occur if acidic bathroom cleaners (like Harpic) are spilled on them or if uncertified SS 202 is mistakenly used outdoors.",
     },
     {
       id: 5,
       category: "Site & Installation",
       question: "How long does fabrication and installation take?",
-      answer: "Standard residential railings and gates typically take 5 to 10 working days from measurement to factory fabrication. Final on-site installation usually requires 1 to 2 days with zero mess.",
+      answer:
+        "Standard residential railings and gates typically take 5 to 10 working days from measurement to factory fabrication. Final on-site installation usually requires 1 to 2 days with zero mess.",
     },
     {
       id: 6,
       category: "Pricing & Quotes",
-      question: "Can I provide my own architect's CAD drawing or Pinterest design?",
-      answer: "Absolutely. More than 60% of our projects are custom-fabricated from architect blueprints, sketches, or photos. Simply share the design on WhatsApp (+91 94688 15735) and our engineering team will evaluate structural feasibility and price.",
+      question:
+        "Can I provide my own architect's CAD drawing or Pinterest design?",
+      answer:
+        "Absolutely. More than 60% of our projects are custom-fabricated from architect blueprints, sketches, or photos. Simply share the design on WhatsApp (+91 94688 15735) and our engineering team will evaluate structural feasibility and price.",
     },
     {
       id: 7,
       category: "Grades & Quality",
-      question: "What is the difference between Mirror Polish and Satin Hairline?",
-      answer: "Mirror polish is a reflective chrome-like glossy surface that sheds dust easily. Satin/Hairline finish has subtle directional grain lines providing a sophisticated, contemporary non-glare matte appearance popular in luxury modern villas.",
+      question:
+        "What is the difference between Mirror Polish and Satin Hairline?",
+      answer:
+        "Mirror polish is a reflective chrome-like glossy surface that sheds dust easily. Satin/Hairline finish has subtle directional grain lines providing a sophisticated, contemporary non-glare matte appearance popular in luxury modern villas.",
     },
     {
       id: 8,
       category: "Site & Installation",
       question: "What warranty do you provide on your steelwork?",
-      answer: "We provide a 15-Year Anti-Rust Material Guarantee on all our SS 304/316 installations, along with a 1-year complimentary workmanship and fastener stability checkup.",
+      answer:
+        "We provide a 15-Year Anti-Rust Material Guarantee on all our SS 304/316 installations, along with a 1-year complimentary workmanship and fastener stability checkup.",
     },
   ],
-  faqCategories: ["All", "Pricing & Quotes", "Grades & Quality", "Site & Installation"],
+  faqCategories: [
+    "All",
+    "Pricing & Quotes",
+    "Grades & Quality",
+    "Site & Installation",
+  ],
   comparisons: [
     {
       feature: "Raw Material Grade",
-      ramdev: "100% Genuine SS 304 & 316 Prime Pipes & Sheets with Material Test Certificate.",
-      others: "Often mix cheap SS 202 or unbranded thin-gauge scrap pipes without testing.",
+      ramdev:
+        "100% Genuine SS 304 & 316 Prime Pipes & Sheets with Material Test Certificate.",
+      others:
+        "Often mix cheap SS 202 or unbranded thin-gauge scrap pipes without testing.",
     },
     {
       feature: "Welding Technique",
-      ramdev: "High-purity Argon TIG welding with full root penetration and smoothed weld seams.",
-      others: "Rough manual stick welding prone to pinholes, slag entrapment, and premature rust.",
+      ramdev:
+        "High-purity Argon TIG welding with full root penetration and smoothed weld seams.",
+      others:
+        "Rough manual stick welding prone to pinholes, slag entrapment, and premature rust.",
     },
     {
       feature: "Surface Polish & Buffing",
-      ramdev: "5-Stage motorized buffing with high-grade compounds for long-lasting mirror/satin shine.",
-      others: "Quick single-pass buffing that turns hazy and oxidizes after the first monsoon.",
+      ramdev:
+        "5-Stage motorized buffing with high-grade compounds for long-lasting mirror/satin shine.",
+      others:
+        "Quick single-pass buffing that turns hazy and oxidizes after the first monsoon.",
     },
     {
       feature: "Fasteners & Anchors",
-      ramdev: "Heavy-duty SS 304 anchor bolts and chemical grouting to eliminate vibration & wobble.",
-      others: "Cheap zinc-plated iron screws that corrode inside the concrete and stain marble.",
+      ramdev:
+        "Heavy-duty SS 304 anchor bolts and chemical grouting to eliminate vibration & wobble.",
+      others:
+        "Cheap zinc-plated iron screws that corrode inside the concrete and stain marble.",
     },
     {
       feature: "Measurement & Fitting",
-      ramdev: "Laser-assisted leveling and millimetric site fabrication with floor protection.",
-      others: "Rough manual tape estimation leading to crooked handrails and damaged floor tiles.",
+      ramdev:
+        "Laser-assisted leveling and millimetric site fabrication with floor protection.",
+      others:
+        "Rough manual tape estimation leading to crooked handrails and damaged floor tiles.",
     },
     {
       feature: "After-Sales & Warranty",
-      ramdev: "Written workmanship & rust guarantee with prompt service support.",
+      ramdev:
+        "Written workmanship & rust guarantee with prompt service support.",
       others: "Zero accountability once the final payment is collected.",
     },
   ],
@@ -641,39 +761,46 @@ export const defaultContent = {
       number: "01",
       title: "Requirement & Free Site Consultation",
       timeline: "Day 1",
-      description: "We discuss your design expectations, aesthetic preference, budget, and project location in Rajasthan or beyond.",
+      description:
+        "We discuss your design expectations, aesthetic preference, budget, and project location in Rajasthan or beyond.",
       deliverable: "Preliminary cost bracket & design portfolio review.",
     },
     {
       number: "02",
       title: "Precision Laser Site Measurement",
       timeline: "Day 2",
-      description: "Our senior technician visits your site with optical laser levels to take exact millimeter dimensions of balconies, stairs, or gates.",
+      description:
+        "Our senior technician visits your site with optical laser levels to take exact millimeter dimensions of balconies, stairs, or gates.",
       deliverable: "Accurate fabrication dimensional sheet.",
     },
     {
       number: "03",
       title: "CAD Blueprint & Grade Certification",
       timeline: "Day 3 - 4",
-      description: "We generate the structural layout and approve steel grade (SS 304 vs 316) along with surface finish (Mirror / Satin / PVD).",
+      description:
+        "We generate the structural layout and approve steel grade (SS 304 vs 316) along with surface finish (Mirror / Satin / PVD).",
       deliverable: "Final agreed fabrication quotation & blueprint.",
     },
     {
       number: "04",
       title: "Precision Laser Cutting & TIG Welding",
       timeline: "Day 5 - 10",
-      description: "Work commences in our specialized workshop. High-tensile Argon TIG welding, seamless grinding, and 5-stage buffing are carried out.",
+      description:
+        "Work commences in our specialized workshop. High-tensile Argon TIG welding, seamless grinding, and 5-stage buffing are carried out.",
       deliverable: "Pre-dispatch factory quality inspection check.",
     },
     {
       number: "05",
       title: "Zero-Mess On-Site Installation",
       timeline: "Day 11 - 12",
-      description: "Our skilled installation team anchors the steelwork with SS 304 drop-in anchors and chemical grout, followed by final handover polishing.",
-      deliverable: "Complete project handover with care instructions & warranty.",
+      description:
+        "Our skilled installation team anchors the steelwork with SS 304 drop-in anchors and chemical grout, followed by final handover polishing.",
+      deliverable:
+        "Complete project handover with care instructions & warranty.",
     },
   ],
-  heroImage: "https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=2200&q=85",
-  aboutImage: "https://images.unsplash.com/photo-1531058020387-3be344556be6?auto=format&fit=crop&w=1200&q=85",
+  heroImage:
+    "https://res.cloudinary.com/j4aomd2r/image/upload/v1793879194/ramdev-steel/site-assets/remote/hero.jpg",
+  aboutImage:
+    "https://res.cloudinary.com/j4aomd2r/image/upload/v1793879194/ramdev-steel/site-assets/remote/about.jpg",
 };
-

@@ -1,11 +1,19 @@
-import gallery1 from "../assets/gallery/Glamorous Curved Staircase Foyer.png";
-import gallery2 from "../assets/gallery/Luxurious Reflective Pivot Gate at Dusk.png";
-import gallery3 from "../assets/gallery/Geometric Security Grille at Twilight.png";
-import gallery4 from "../assets/gallery/Luxury Glass Balcony at Sunset.png";
-import gallery5 from "../assets/gallery/Luxurious Chrome Dining Room with Lilies.png";
-import gallery6 from "../assets/gallery/Luxury Villa Gate at Dusk.png";
-import gallery7 from "../assets/gallery/Modern Stainless Steel Entrance at Night.png";
-import gallery8 from "../assets/gallery/Illuminated Geometric Fence at Twilight.png";
+import { cloudinaryAssets } from "./cloudinaryAssets";
+
+const gallery1 =
+  cloudinaryAssets["gallery/Glamorous Curved Staircase Foyer.png"];
+const gallery2 =
+  cloudinaryAssets["gallery/Luxurious Reflective Pivot Gate at Dusk.png"];
+const gallery3 =
+  cloudinaryAssets["gallery/Geometric Security Grille at Twilight.png"];
+const gallery4 = cloudinaryAssets["gallery/Luxury Glass Balcony at Sunset.png"];
+const gallery5 =
+  cloudinaryAssets["gallery/Luxurious Chrome Dining Room with Lilies.png"];
+const gallery6 = cloudinaryAssets["gallery/Luxury Villa Gate at Dusk.png"];
+const gallery7 =
+  cloudinaryAssets["gallery/Modern Stainless Steel Entrance at Night.png"];
+const gallery8 =
+  cloudinaryAssets["gallery/Illuminated Geometric Fence at Twilight.png"];
 
 export const galleryImages = [
   gallery1,
@@ -18,7 +26,13 @@ export const galleryImages = [
   gallery8,
 ];
 
-export const galleryCategories = ["All", "Railings", "Gates", "Grills", "Furniture"];
+export const galleryCategories = [
+  "All",
+  "Railings",
+  "Gates",
+  "Grills",
+  "Furniture",
+];
 
 export const galleryItems = [
   {

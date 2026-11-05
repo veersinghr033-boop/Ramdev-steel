@@ -1,9 +1,17 @@
-import projectStairsImg from "../assets/project/Luminous Curved Staircase Foyer.png";
-import projectBalconyImg from "../assets/project/Sunset Terrace Overlooking the City and Fort.png";
-import projectGateImg from "../assets/project/Luxurious Golden-Hour Mansion Gate.png";
-import projectGrillsImg from "../assets/project/Warmly Lit Modern Villa Facade.png";
-import projectAtriumImg from "../assets/project/Modern Glass Atrium Lobby.png";
-import projectPivotGateImg from "../assets/project/Luxury Gate at Twilight.png";
+import { cloudinaryAssets } from "./cloudinaryAssets";
+
+const projectStairsImg =
+  cloudinaryAssets["project/Luminous Curved Staircase Foyer.png"];
+const projectBalconyImg =
+  cloudinaryAssets["project/Sunset Terrace Overlooking the City and Fort.png"];
+const projectGateImg =
+  cloudinaryAssets["project/Luxurious Golden-Hour Mansion Gate.png"];
+const projectGrillsImg =
+  cloudinaryAssets["project/Warmly Lit Modern Villa Facade.png"];
+const projectAtriumImg =
+  cloudinaryAssets["project/Modern Glass Atrium Lobby.png"];
+const projectPivotGateImg =
+  cloudinaryAssets["project/Luxury Gate at Twilight.png"];
 
 export const projectImages = [
   projectStairsImg,

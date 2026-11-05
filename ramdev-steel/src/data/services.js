@@ -1,9 +1,17 @@
-import serviceRailingImg from "../assets/service/Modern Staircase with Polished Steel Railing.png";
-import serviceGlassImg from "../assets/service/Modern Glass Balcony at Sunset.png";
-import serviceGateImg from "../assets/service/Modern Luxury Gate at Twilight.png";
-import serviceGrillImg from "../assets/service/Modern Evening Facade with Grilled Windows.png";
-import serviceFabricationImg from "../assets/service/Luxury Stainless Steel Terrace Kitchen.png";
-import serviceInstallationImg from "../assets/service/Modern Railing Installation Team.png";
+import { cloudinaryAssets } from "./cloudinaryAssets";
+
+const serviceRailingImg =
+  cloudinaryAssets["service/Modern Staircase with Polished Steel Railing.png"];
+const serviceGlassImg =
+  cloudinaryAssets["service/Modern Glass Balcony at Sunset.png"];
+const serviceGateImg =
+  cloudinaryAssets["service/Modern Luxury Gate at Twilight.png"];
+const serviceGrillImg =
+  cloudinaryAssets["service/Modern Evening Facade with Grilled Windows.png"];
+const serviceFabricationImg =
+  cloudinaryAssets["service/Luxury Stainless Steel Terrace Kitchen.png"];
+const serviceInstallationImg =
+  cloudinaryAssets["service/Modern Railing Installation Team.png"];
 
 export const serviceImages = [
   serviceRailingImg,
@@ -19,7 +27,11 @@ export const services = [
     id: 1,
     number: "01",
     title: "SS Balcony & Stair Railings",
-    deliverables: ["304/316 Grade Steel", "Precision Core Drill Anchors", "Seamless Mirror/Satin Buff"],
+    deliverables: [
+      "304/316 Grade Steel",
+      "Precision Core Drill Anchors",
+      "Seamless Mirror/Satin Buff",
+    ],
     description:
       "Engineered stainless steel railings for residential staircases, exterior balconies, ramps, and commercial atriums with strict safety load compliance.",
     image: serviceRailingImg,
@@ -28,7 +40,11 @@ export const services = [
     id: 2,
     number: "02",
     title: "Frameless Glass Railings",
-    deliverables: ["12mm Toughened Glass", "SS 304 Solid Base Spigots", "Slimline Aluminum Channel"],
+    deliverables: [
+      "12mm Toughened Glass",
+      "SS 304 Solid Base Spigots",
+      "Slimline Aluminum Channel",
+    ],
     description:
       "Minimalist architectural glass railings providing uninterrupted panoramic views, optimal safety barrier, and sleek modern aesthetic.",
     image: serviceGlassImg,
@@ -37,7 +53,11 @@ export const services = [
     id: 3,
     number: "03",
     title: "Designer Steel Gates",
-    deliverables: ["Anti-Sag Box Frame", "CNC Laser Cut Motifs", "Motorized Automation Ready"],
+    deliverables: [
+      "Anti-Sag Box Frame",
+      "CNC Laser Cut Motifs",
+      "Motorized Automation Ready",
+    ],
     description:
       "Grand entry gates combining high-tensile steel integrity with contemporary laser lattice designs, premium ball bearing pivots, and security deadbolts.",
     image: serviceGateImg,
@@ -46,7 +66,11 @@ export const services = [
     id: 4,
     number: "04",
     title: "Safety Grills & Partitions",
-    deliverables: ["Burglary-Resistant Rods", "Concealed Fastening", "Weather-Resistant Polish"],
+    deliverables: [
+      "Burglary-Resistant Rods",
+      "Concealed Fastening",
+      "Weather-Resistant Polish",
+    ],
     description:
       "Decorative and high-security window grills, balcony mesh frames, and interior spatial partitions tailored to modern architectural layouts.",
     image: serviceGrillImg,
@@ -55,7 +79,11 @@ export const services = [
     id: 5,
     number: "05",
     title: "Custom Steel Fabrication",
-    deliverables: ["CAD Blueprinting", "TIG Argon Welding", "Custom Dimensions"],
+    deliverables: [
+      "CAD Blueprinting",
+      "TIG Argon Welding",
+      "Custom Dimensions",
+    ],
     description:
       "Made-to-order architectural steelwork, designer furniture bases, commercial kitchen counters, and structural assemblies for villas and hotels.",
     image: serviceFabricationImg,
@@ -64,7 +92,11 @@ export const services = [
     id: 6,
     number: "06",
     title: "Site Installation & Finishing",
-    deliverables: ["Expert Fitting Team", "Chemical Anchor Fasteners", "Final Mirror Buffing"],
+    deliverables: [
+      "Expert Fitting Team",
+      "Chemical Anchor Fasteners",
+      "Final Mirror Buffing",
+    ],
     description:
       "End-to-end on-site installation by certified fabrication technicians ensuring perfect leveling, rigid anchoring, and scratch-free handover.",
     image: serviceInstallationImg,

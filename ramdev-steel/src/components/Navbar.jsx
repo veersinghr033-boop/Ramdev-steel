@@ -18,7 +18,9 @@ import {
 } from "react-icons/fi";
 import { FaWhatsapp } from "react-icons/fa";
 
-import logo from "../assets/logo.jpg";
+import { cloudinaryAssets } from "../data/cloudinaryAssets";
+
+const logo = cloudinaryAssets["logo.jpg"];
 
 const navItems = [
   { name: "Home", href: "#home", icon: FiHome },
