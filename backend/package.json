@@ -8,7 +8,8 @@
     "start": "node src/server.js",
     "seed": "node src/scripts/seed.js",
     "upload:assets": "node src/scripts/uploadStaticAssets.js",
-    "list:assets": "node src/scripts/listStaticAssets.js"
+    "list:assets": "node src/scripts/listStaticAssets.js",
+    "migrate:content-images": "node src/scripts/migrateStoredContentImages.js"
   },
   "dependencies": {
     "cloudinary": "^2.5.1",

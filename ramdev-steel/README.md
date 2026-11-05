@@ -1,16 +1,27 @@
-# React + Vite
+# Ramdev Steel
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Run the complete app locally
 
-Currently, two official plugins are available:
+1. Install dependencies in both `ramdev-steel/` and `backend/` with `npm install`.
+2. Copy `backend/.env.example` to `backend/.env` and set `MONGODB_URI`, `ADMIN_USERNAME`, `ADMIN_PASSWORD`, and a `JWT_SECRET` with at least 32 characters. Keep `PORT=3001` so the Vite API proxy can reach the backend.
+3. Set `CLOUDINARY_CLOUD_NAME`, `CLOUDINARY_API_KEY`, and `CLOUDINARY_API_SECRET` in `backend/.env` to use Cloudinary for image uploads. If omitted, uploads use MongoDB GridFS.
+4. Ensure MongoDB is reachable, then run `npm run dev` from `ramdev-steel/`.
+5. Open `http://localhost:5173` or `http://localhost:5173/admin`.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+The `dev` script starts Vite and the API together. Vite forwards `/api` and `/uploads` requests to `http://127.0.0.1:3001`. Use `npm run dev:web` only when the API is already running separately.
 
-## React Compiler
+## Deploy to Vercel
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Set Vercel's **Root Directory** to `ramdev-steel/`.
+- Use `npm run build` as the build command and `dist` as the output directory.
+- Add these environment variables in the Vercel project settings for every deployment environment:
+  - `MONGODB_URI`
+  - `ADMIN_USERNAME`
+  - `ADMIN_PASSWORD`
+  - `JWT_SECRET` (at least 32 characters)
+  - `CLOUDINARY_CLOUD_NAME`
+  - `CLOUDINARY_API_KEY`
+  - `CLOUDINARY_API_SECRET`
+  - `CLIENT_ORIGIN` (your deployed site origin)
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+The Vercel rewrite sends `/api` requests to the serverless API in this project. Leave `VITE_API_URL` unset to use the same-origin API on Vercel; do not set it to `localhost` for a production deployment.

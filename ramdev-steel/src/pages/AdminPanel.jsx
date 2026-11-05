@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { FiCheck, FiCopy, FiImage, FiTrash2, FiUploadCloud, FiX } from "react-icons/fi";
 import { contentDefaults } from "../data/contentDefaults";
+import { migrateLegacyImageReferences } from "../data/cloudinaryAssets";
 import {
     getApiErrorMessage,
     deleteAdminImage,
@@ -99,7 +100,8 @@ function AdminPanel() {
                 getSiteContent(),
                 getUploadedImages(),
             ]);
-            const nextContent = { ...contentDefaults, ...(saved.content || {}) };
+            const migratedContent = migrateLegacyImageReferences(saved.content || {});
+            const nextContent = { ...contentDefaults, ...migratedContent };
             setDrafts(nextContent);
             setSavedContent(nextContent);
             setHasPersistedContent(saved.content !== null && saved.content !== undefined);
@@ -133,7 +135,8 @@ function AdminPanel() {
         setNotice("");
         try {
             const result = await saveSiteContent(cloneContent(drafts));
-            setSavedContent({ ...contentDefaults, ...result.content });
+            const migratedContent = migrateLegacyImageReferences(result.content);
+            setSavedContent({ ...contentDefaults, ...migratedContent });
             setHasPersistedContent(true);
             setNotice("All content saved to MongoDB and published.");
         } catch (saveError) {

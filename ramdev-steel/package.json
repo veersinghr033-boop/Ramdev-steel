@@ -4,10 +4,11 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "npm run dev:full",
+    "dev:web": "vite",
     "server": "npm --prefix ../backend run dev",
     "seed": "npm --prefix ../backend run seed",
-    "dev:full": "concurrently \"npm:server\" \"npm:dev\"",
+    "dev:full": "concurrently -k -n api,web \"npm:server\" \"npm:dev:web\"",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

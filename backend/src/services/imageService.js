@@ -2,7 +2,7 @@ import crypto from "node:crypto";
 import { readFile, readdir, unlink } from "node:fs/promises";
 import path from "node:path";
 import mongoose from "mongoose";
-import cloudinary from "../config/cloudinary.js";
+import { configureCloudinary } from "../config/cloudinary.js";
 import { ensureUploadsDirectory, uploadsDirectory } from "../config/uploads.js";
 
 const bucketName = "siteImages";
@@ -50,14 +50,15 @@ async function storeImageBuffer({
 }
 
 export async function saveUploadedImage(file) {
+  const cloudinaryClient = configureCloudinary();
   if (
-    cloudinary &&
+    cloudinaryClient &&
     process.env.CLOUDINARY_CLOUD_NAME &&
     process.env.CLOUDINARY_API_KEY &&
     process.env.CLOUDINARY_API_SECRET
   ) {
     const uploadResult = await new Promise((resolve, reject) => {
-      const stream = cloudinary.uploader.upload_stream(
+      const stream = cloudinaryClient.uploader.upload_stream(
         {
           folder: "ramdev-steel",
           resource_type: "image",
@@ -115,8 +116,9 @@ export async function deleteUploadedImage(filename) {
       error.status = 400;
       throw error;
     }
+    const cloudinaryClient = configureCloudinary();
     if (
-      !cloudinary ||
+      !cloudinaryClient ||
       !process.env.CLOUDINARY_CLOUD_NAME ||
       !process.env.CLOUDINARY_API_KEY ||
       !process.env.CLOUDINARY_API_SECRET
@@ -126,7 +128,7 @@ export async function deleteUploadedImage(filename) {
       throw error;
     }
 
-    const result = await cloudinary.uploader.destroy(filename, {
+    const result = await cloudinaryClient.uploader.destroy(filename, {
       invalidate: true,
       resource_type: "image",
     });
@@ -160,15 +162,16 @@ export function openImageDownloadStream(fileId) {
 
 export async function listUploadedImages() {
   const images = [];
+  const cloudinaryClient = configureCloudinary();
 
   if (
-    cloudinary &&
+    cloudinaryClient &&
     process.env.CLOUDINARY_CLOUD_NAME &&
     process.env.CLOUDINARY_API_KEY &&
     process.env.CLOUDINARY_API_SECRET
   ) {
     try {
-      const result = await cloudinary.api.resources({
+      const result = await cloudinaryClient.api.resources({
         type: "upload",
         prefix: "ramdev-steel",
         max_results: 100,
