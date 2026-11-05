@@ -36,7 +36,7 @@ function AdminLogin({ onLogin }) {
         setError("");
         try {
             await loginAdmin({ username, password });
-            onLogin();
+            await onLogin();
         } catch (requestError) {
             setError(getApiErrorMessage(requestError));
         } finally {
@@ -97,19 +97,20 @@ function AdminPanel() {
             setAuthenticated(true);
             setError("");
         } catch (requestError) {
+            setAuthenticated(false);
             const message = getApiErrorMessage(requestError);
-            if (/sign-in|required|expired/i.test(message)) setAuthenticated(false);
-            else setError(message);
+            setError(message);
+            throw requestError;
         }
     };
 
     useEffect(() => {
+        // Check API health status, but do NOT auto-login to ensure login form is always required
         getApiHealth()
             .then((health) => setDatabaseStatus(health.database))
             .catch(() => setDatabaseStatus("offline"));
-        getAdminSession()
-            .then(loadAdminData)
-            .catch(() => setAuthenticated(false));
+        // Strictly start in unauthenticated state
+        setAuthenticated(false);
     }, []);
 
     useEffect(() => () => {
