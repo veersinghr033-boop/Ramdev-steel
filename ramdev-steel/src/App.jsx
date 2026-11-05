@@ -21,7 +21,7 @@ import AdminPanel from "./pages/AdminPanel";
 import { SiteContentProvider } from "./data/SiteContentContext";
 
 function App() {
-  if (window.location.pathname === "/admin") return <AdminPanel />;
+  if (window.location.pathname.startsWith("/admin")) return <AdminPanel />;
   return (
     <SiteContentProvider>
       <PublicSite />
