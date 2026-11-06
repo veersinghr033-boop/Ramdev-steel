@@ -1,10 +1,11 @@
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { FiCheck, FiCopy, FiImage, FiTrash2, FiUploadCloud, FiX } from "react-icons/fi";
 import { contentDefaults } from "../data/contentDefaults";
 import { migrateLegacyImageReferences } from "../data/cloudinaryAssets";
 import {
     getApiErrorMessage,
     deleteAdminImage,
+    getAdminSession,
     getUploadedImages,
     loginAdmin,
     logoutAdmin,
@@ -74,6 +75,7 @@ function AdminLogin({ onLogin }) {
 
 function AdminPanel() {
     const [authenticated, setAuthenticated] = useState(false);
+    const [checkingSession, setCheckingSession] = useState(true);
     const [drafts, setDrafts] = useState(() => cloneContent(contentDefaults));
     const [savedContent, setSavedContent] = useState(() => cloneContent(contentDefaults));
     const [hasPersistedContent, setHasPersistedContent] = useState(false);
@@ -94,7 +96,7 @@ function AdminPanel() {
     const activeGroup = useMemo(() => groups.find((group) => group.keys.includes(activeKey)), [activeKey]);
     const hasUnsavedChanges = !hasPersistedContent || JSON.stringify(drafts) !== JSON.stringify(savedContent);
 
-    const loadAdminData = async () => {
+    const loadAdminData = useCallback(async () => {
         try {
             const [saved, imageList] = await Promise.all([
                 getSiteContent(),
@@ -114,16 +116,28 @@ function AdminPanel() {
             setError(message);
             throw requestError;
         }
-    };
+    }, []);
 
     useEffect(() => {
-        // Check API health status, but do NOT auto-login to ensure login form is always required
+        let mounted = true;
         getApiHealth()
             .then((health) => setDatabaseStatus(health.database))
             .catch(() => setDatabaseStatus("offline"));
-        // Strictly start in unauthenticated state
-        setAuthenticated(false);
-    }, []);
+
+        const restoreSession = async () => {
+            try {
+                await getAdminSession();
+                if (mounted) await loadAdminData();
+            } catch {
+                if (mounted) setAuthenticated(false);
+            } finally {
+                if (mounted) setCheckingSession(false);
+            }
+        };
+
+        void restoreSession();
+        return () => { mounted = false; };
+    }, [loadAdminData]);
 
     useEffect(() => () => {
         if (imagePreviewUrl.current) URL.revokeObjectURL(imagePreviewUrl.current);
@@ -242,11 +256,18 @@ function AdminPanel() {
         setAuthenticated(false);
     };
 
+    if (checkingSession) {
+        return (
+            <main className="grid min-h-screen place-items-center bg-slate-950 px-4 text-slate-100">
+                <p role="status" className="rounded-xl bg-white/10 px-5 py-3 text-sm font-semibold">Checking admin session…</p>
+            </main>
+        );
+    }
     if (!authenticated) return <AdminLogin onLogin={loadAdminData} />;
 
     return (
-        <div className="min-h-screen bg-slate-100 text-slate-900">
-            <header className="sticky top-0 z-20 border-b border-slate-200 bg-white/95 backdrop-blur">
+        <div className="flex h-dvh flex-col overflow-hidden bg-slate-100 text-slate-900">
+            <header className="sticky top-0 z-20 shrink-0 border-b border-slate-200 bg-white/95 backdrop-blur">
                 <div className="mx-auto flex max-w-375 items-center justify-between gap-4 px-4 py-4 sm:px-7">
                     <div className="flex items-center gap-3">
                         <div className="grid h-11 w-11 place-items-center rounded-2xl bg-orange-600 text-lg font-black text-white">R</div>
@@ -260,8 +281,8 @@ function AdminPanel() {
                 </div>
             </header>
 
-            <main className="mx-auto grid max-w-375 gap-4 px-3 py-4 sm:gap-6 sm:px-7 sm:py-6 lg:grid-cols-[270px_minmax(0,1fr)]">
-                <aside className="hidden h-fit rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:block">
+            <main className="mx-auto grid min-h-0 w-full max-w-375 flex-1 gap-4 overflow-hidden px-3 py-4 sm:gap-6 sm:px-7 sm:py-6 lg:grid-cols-[270px_minmax(0,1fr)]">
+                <aside className="hidden min-h-0 overflow-y-auto rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:block">
                     <div className="mb-4 px-2"><p className="text-xs font-black uppercase tracking-widest text-slate-400">Manage</p><p className="mt-1 text-sm text-slate-600">Content groups</p></div>
                     <nav className="space-y-5">
                         {groups.map((group) => <div key={group.title}>
@@ -272,8 +293,8 @@ function AdminPanel() {
                     <button type="button" onClick={resetToDefaults} className="mt-6 w-full rounded-xl border border-slate-200 px-3 py-2.5 text-sm font-bold text-slate-600 hover:border-orange-300 hover:text-orange-700">Restore original content</button>
                 </aside>
 
-                <section className="min-w-0 space-y-5">
-                    <div className="rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:hidden">
+                <section className="min-h-0 min-w-0 space-y-5 overflow-y-auto overscroll-contain">
+                    <div className="sticky top-0 z-10 rounded-2xl border border-slate-200 bg-white p-4 shadow-sm lg:hidden">
                         <label htmlFor="admin-content-section" className="mb-2 block text-xs font-black uppercase tracking-widest text-slate-500">Manage content</label>
                         <select
                             id="admin-content-section"
